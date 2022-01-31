@@ -1,0 +1,27 @@
+{
+    "scripts": {
+        "pm2": "pm2",
+        "start": "node app.js",
+        "stop": "pm2 stop ecosystem.config.js",
+        "delete": "pm2 delete ecosystem.config.js",
+        "knex": "knex --knexfile sql/db/knexfile.js --debug"
+    },
+    "dependencies": {
+        "bcrypt": "^3.0.4",
+        "dotenv": "^6.2.0",
+        "express": "^4.17.2",
+        "knex": "^0.16.3",
+        "mysql": "^2.18.1",
+        "node-xlsx": "^0.21.0",
+        "pm2": "^5.1.2",
+        "read-excel-file": "^5.2.26",
+        "rpc-websocket": "^0.7.6",
+        "rpc-websockets": "^7.4.17",
+        "serialport": "^9.2.8",
+        "socket.io": "^4.4.1",
+        "webhdfs": "^1.2.0",
+        "websocket": "^1.0.34",
+        "ws": "^8.4.2",
+        "xhr2": "^0.2.1"
+    }
+}

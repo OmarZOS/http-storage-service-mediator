@@ -1,0 +1,23 @@
+version: "1"
+services:
+  storage_service:
+    build: .
+    command: node app.js
+    restart: always
+    environment:
+      SQL_DATABASE_HOST: localhost
+      SQL_DATABASE: sonatrachProduction
+      SQL_USER: crafterZos
+      SQL_PASSWORD: crafterZos
+      SQL_PORT: 3333
+      PORT: 8080
+      HDFS_USER: hadoop
+      HDFS_HOST: localhost
+      HDFS_Port: 3030
+    ports:
+      - 3000:3030 #HDFS
+      - 8080:3333 #SQL
+      - 8001:8080 #listening port
+    volumes:
+    - .:/code
+    - /code/node_modules

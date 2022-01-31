@@ -1,0 +1,1 @@
+const hdfs = require('./startHdfs');
