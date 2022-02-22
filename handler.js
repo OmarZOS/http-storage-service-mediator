@@ -2,26 +2,34 @@ const schema = require('./sql/schema')
 const constants = require('./constants')
 const hdfs = require('./hdfs/Hdfs')
 
-
-
 const requestResolver = async(json) => {
-    // let { val } = JSON.parse(JSON.stringify(json))
 
-    // console.log("Inside handler")
-    console.log(json.destination + " before.")
+    switch (json.modelType) {
+        case "sql":
 
-    if (json.destination == 'sql') {
-        // console.log("sql??");
+            break;
+        case "hdfs":
+
+            break;
+        case "spark":
+
+            break;
+
+        default:
+            break;
+    }
+
+    if (json.modelType == "sql") {
+        // console.log("sql");
 
         if (json.request_Type == "record") {
 
-            const req = get_requete(json);
+            const req = await get_requete(json);
             console.log("requete : " + req);
 
             if (req == '') {
                 throw constants.EMPTY_QUERY_ERROR_MESSAGE;
             } else {
-
                 return await schema.getData(req, (error, results, fields) => {
                     if (error) { throw constants.FETCH_DATA_ERROR_MESSAGE + " " + error; }
                     return results;
@@ -41,13 +49,12 @@ const requestResolver = async(json) => {
         //Connection HDFS
         return 'Es ist getan'
     }
-
 }
 
 function get_json() {
 
     var json = {
-        "operation": "record",
+        "request_Type": "record",
         "destination": "sql",
         "operation": "select",
         "data": [{
@@ -57,14 +64,11 @@ function get_json() {
             "valeur": ["1", "hassi Mes3oud"],
             "condition": ["=", "="]
         }]
-
     }
-
     return json;
-
 }
 
-const get_requete = (json) => {
+const get_requete = async(json) => {
     var req = '';
     try {
         switch (json.operation) {
@@ -124,7 +128,8 @@ const get_requete = (json) => {
 
                 break;
             case 'raw':
-                return json.data;
+
+                break;
 
             default:
                 break;
